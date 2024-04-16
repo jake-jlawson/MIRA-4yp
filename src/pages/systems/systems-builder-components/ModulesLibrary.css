@@ -1,0 +1,61 @@
+/*
+    MODULES LIBRARY CSS
+    __Modules List/Library Styling__
+*/
+
+#modulesLibraryContainer {
+    /*Dimensions*/
+    width: 250px;
+    height: auto;
+
+    /*Positioning*/
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    z-index: 999;
+
+    /*Styling*/
+    border: 2px solid;
+    border-color: rgb(240, 240, 240);
+}
+
+
+/*MODULES LIBRARY TAB*/
+#modulesLibraryTab {
+    background-color: rgb(240, 240, 240);
+    padding: 5px 10px;
+    padding-bottom: 6px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+#modulesTabIcon {
+    cursor: pointer;
+}
+
+#reloadIcon {
+    margin-right: 5px;
+}
+
+
+/*MODULES TAB DISPLAY*/
+#modulesDisplay {
+    background-color: white;
+    padding: 5px;
+    padding-top: 2px;
+
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+.modules-display-open {
+    height: auto;
+    max-height: 400px;
+    overflow-y: scroll;
+}
+.modules-display-closed {
+    height: 0px;
+    overflow-y: hidden;
+}

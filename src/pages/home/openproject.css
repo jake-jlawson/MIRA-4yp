@@ -1,0 +1,20 @@
+/*
+    OPEN PROJECTS COMPONENTS: CSS
+    __Open Projects styling__
+*/
+
+
+/* OPEN PROJECT COMPONENT */
+.open-projects-table table tr td:nth-child(3n) {
+    text-align: right;
+}
+
+.open-projects-table table tr td:nth-child(2n+2) {
+    color: rgb(124, 124, 124);
+    font-style: italic;
+}
+
+.open-projects-table table tr td:nth-child(3n-2) {
+    font-weight: 600;
+}
+

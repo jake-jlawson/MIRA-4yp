@@ -1,0 +1,133 @@
+/*
+    MODULE NODES: CSS
+    __Styling for module ReactFlow nodes__
+*/
+
+/*CONTAINER*/
+#moduleContainer {
+
+    /*borders, background and shadow*/
+    background-color: #fcfcfc;
+    border-radius: 6px;
+    border: 0.5px solid var(--color);
+
+    -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.1);
+
+
+    /*flex-properties*/
+    display: flex;
+    flex-direction: column;
+
+    
+}
+
+
+/*MODULE HEADER*/
+#moduleHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px 13px;
+    padding-bottom: 8px;
+
+    font-family: Berka;
+    font-weight: 800;
+    font-size: 17px;
+    color: var(--color)
+}
+
+/*Module type*/
+#moduleType {
+    background-color: var(--color);
+    opacity: 0.9;
+
+    border-radius: 7px;
+
+    height: 13px;
+    
+    padding: 3px 8px;
+    
+    font-size: 7px;
+    font-weight: bold;
+    color: #FFFFFF;
+    line-height: 0;
+        font-family: Arial;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: 10px;
+}
+
+
+/*INPUTS/OUTPUTS*/
+.input-output {
+    border-top: 0.5px solid #E9E9E9;
+    border-bottom: 0.5px solid #E9E9E9;
+
+    margin-bottom: 6px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+#moduleInputs {
+    border-right: 3px solid var(--color);
+}
+#moduleOutputs {
+    border-left: 3px solid var(--color);
+}
+
+p.io-name {
+    font-size: 11px;
+    letter-spacing: -0.3px;
+    line-height: 0;
+    font-weight: 200;
+    font-family: Arial;
+
+    padding-bottom: 1px;
+}
+
+#ioSpacer {
+    width: 35px;
+}
+
+#moduleInput {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+#moduleOutput {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+}
+
+/*io types*/
+.io-type {
+    border-radius: 9px;
+    background-color: #F1F1F1;
+    height: 10px;
+
+    /*IO type font styling*/
+    font-size: 6px;
+    font-style: italic;
+    color: #C0C0C0;
+    line-height: normal;
+    letter-spacing: -0.2px;
+    font-family: Arial;
+
+    padding-left: 8px;
+    padding-right: 8px;
+
+    margin: 5px 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,39 @@
+/*
+    APPLICATION HOME PAGE: CSS
+    __Home page styling__
+*/
+
+/* HOME AREAS */
+#homeContainer { /*Main Container for the home page*/
+    height: 100%;
+
+    /*Center all content inside the home container*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+
+}
+
+.project-control { /*Styling for Project Control Areas (Open and Create Project)*/
+    /*Background and Border*/
+    background-color: #fcfcfc;
+    border: solid;
+    border-color: rgb(226, 226, 226);
+    border-width: 0.5px;
+
+    /*Dimensions and Spacing*/
+    width: 800px;
+    height: auto;
+    padding: 20px;
+    
+}
+
+.project-control-title {
+    font-weight: 300 !important;
+    padding-bottom: 25px;
+}
+
+
+

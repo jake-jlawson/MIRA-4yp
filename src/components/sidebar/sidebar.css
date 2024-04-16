@@ -1,0 +1,252 @@
+/* 
+    APPLICATION SIDEBAR: CSS
+    __Styling for the CSS__
+*/
+
+/* CONTAINERS */
+#sidebarContainer {
+    z-index: 1;
+    position: relative;
+
+
+    /*Flex Parent Settings*/
+    display: flex; /*space areas along the sidebar*/
+    flex-direction: column;
+    justify-content: space-between;
+    flex-shrink: 0;
+
+
+    /*Styling, Shadow and Border*/
+    background-color: #fcfcfc;
+        
+    border-right: solid;
+    border-right-color: rgb(228, 228, 228);
+    border-right-width: 0.5px;
+
+    -webkit-box-shadow: 9px -1px 17px -17px rgba(0,0,0,0.3);
+    -moz-box-shadow: 9px -1px 17px -17px rgba(0,0,0,0.3);
+    box-shadow: 9px -1px 17px -17px rgba(0,0,0,0.3);
+}
+
+#navContainer {
+    /*Flex Parent Settings*/
+    display: flex; /*space areas along the sidebar*/
+    flex-direction: column;
+    justify-content: space-between;
+
+    flex-grow: 1;
+
+    padding: 0px 38px;
+    padding-bottom: 48px;
+    transition: padding 0.3s ease-in-out; /*animation*/
+}
+
+#logoContainer {
+    width: 100%;
+    height: 210px;
+}
+
+
+/* LOGO AND TOGGLE BUTTON */
+#toggleBtn {
+    /*Button Size*/
+    width: 25px;
+    height: auto;
+
+    /*Button Positioning*/
+    position: absolute;
+    right: -0.5px;
+    top: 80px;
+
+    cursor: pointer;
+}
+
+#appLogo {
+    width: 165px;
+    overflow: hidden;
+    z-index: -1;
+
+    position: relative;
+    left: 25px;
+    top: 50px;
+
+    transition: all 0.5s ease-in-out; /*animation*/
+}
+
+
+/* SIDEBAR OPEN/CLOSED STYLES */
+.sidebar-open {
+    background-color: white;
+
+    /*Dimensions*/
+    width: 20.2vw; /*this attribute is variable*/
+    transition: width 0.3s ease-in-out;
+}
+
+.sidebar-closed {
+
+    /*Dimensions*/
+    width: 3.45vw; /*this attribute is variable*/
+    transition: width 0.3s ease-in-out;
+}
+
+.sidebar-closed #primaryNavButton h4{ /*Primary Nav Text on closed*/
+    width: 0px;
+    margin: 0px;
+    opacity: 0%;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out; /*animation*/
+
+    display: none;
+}
+
+.sidebar-closed #navContainer { /*Primary Nav Container on closed*/
+    padding: 0px 0px 48px 0px;
+    transition: all 0.3s ease-in-out; /*animation*/
+}
+
+.sidebar-closed #externalNavButton h5{ /*External Nav Text on closed*/
+    width: 0px;
+    margin: 0px;
+    opacity: 0%;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out; /*animation*/
+}
+
+.sidebar-closed .title-txt { /*External Nav Label on closed*/
+    opacity: 0%;
+    width: 0px;
+    overflow: hidden;
+}
+
+.sidebar-closed #appLogo {
+    opacity: 0%;
+    overflow: hidden;
+    transition: all 0s ease-in-out; /*animation*/
+}
+
+
+/* 
+    EXTERNAL NAVIGATION
+*/
+#externalNav {
+    padding-bottom: 80px;
+}
+
+
+
+/* 
+    NAVIGATION BUTTONS
+*/
+.nav-button {
+    
+    /*Sizing and default positioning*/
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    padding: 0px 14px;
+
+    /*Make buttons clickable*/
+    cursor: pointer;
+}
+
+
+/* Primary Navigation */
+#primaryNav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#primaryNavButton {
+    
+    /*Dimensions and Layout*/
+    height: 40px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    /*Styling*/
+    border-radius: 8px;
+}
+
+#primaryNavButton:hover {
+    background-color: #f5f5f5;
+}
+
+.nav-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: 0.5px;
+    margin-top: 2px;
+}
+
+#primaryNavButton h4 {
+    margin-left: 12px;
+
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out; /*animation*/
+    transition: width 0.3s ease-in-out; /*animation*/
+}
+
+.inactive-button h4 {
+    font-weight: 400;
+    color: rgb(26, 26, 26);
+}
+
+.active-button {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    font-weight: 800;
+    color: rgb(0, 0, 0);
+}
+
+.active-button h4 {
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+}
+
+/* External Navigation */
+#externalNav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#externalNavButton {
+    height: 16px;
+}
+
+#externalNavButton h5 {
+    font-weight: 400;
+    margin-left: 5px;
+
+    overflow: hidden;
+    transition: all 0.3s ease-in-out; /*animation*/
+    text-wrap: nowrap;
+
+    color: rgb(26, 26, 26);
+}
+
+#extLinksTxt {
+    margin-bottom: 6px;
+}
+
+.title-txt { /*For bold title text in sidebar*/
+    font-weight: 500;
+    font-size: 14px;
+    overflow: hidden;
+    text-wrap: nowrap;
+
+    color: rgb(26, 26, 26);
+}
+
+
+/* Settings Button */
+#settingsTxt {
+    margin-left: 6px;
+}

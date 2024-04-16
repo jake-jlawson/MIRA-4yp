@@ -1,0 +1,11 @@
+/* CREATE PROJECT COMPONENT */
+#createProject {
+    height: auto;
+    width: 100%;
+
+    /*Flex properties*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}
