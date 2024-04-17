@@ -8,13 +8,9 @@ import { Handle, Position, useUpdateNodeInternals } from 'reactflow';
 import './PreNodes.css'; //projects page css
 
 
-const module_types_colours = {
-    "PRE": "#FFE438",
-}
-
 
 /* NODE COMPONENT - Component defines a processing module as a node*/
-export default function ModuleNode({ data }) {
+export default function PreNode({ data }) {
     
     const onChange = useCallback((evt) => {
         console.log(evt.target.value);
@@ -30,26 +26,8 @@ export default function ModuleNode({ data }) {
 
     //Dynamically change colour depending on module type
     const rootStyle = {
-        '--color': module_types_colours[type]
+        '--color': "#FFE438"
     }
-
-    //Handle root positioning
-    const getHandlePosition = (index, io) => {
-        
-        if (io == "input") {
-            var idx_1 = 49;
-            // console.log(idx_1)
-        } else if (io == "output") {
-            var idx_1 = 49 + (Object.keys(inputs).length-1)*20 + 10 + 13 + 10;
-            // console.log(idx_1)
-        }
-
-        let top_position = idx_1 + (index)*20
-        let pos_str = top_position.toString() + "px"
-        
-        return {"top": pos_str}
-    }
-
 
     return (
         
@@ -61,7 +39,7 @@ export default function ModuleNode({ data }) {
                     type="target" 
                     id={`handle-${key}`}
                     position={Position.Left}
-                    style={getHandlePosition(index, "input")}
+                    style={{top: "33px"}}
                     isConnectable={1}
                 />
             ))}
@@ -72,7 +50,7 @@ export default function ModuleNode({ data }) {
                     type="source" 
                     id={`handle-${key}`}
                     position={Position.Right}
-                    style={getHandlePosition(index, "output")}
+                    style={{top: "33px"}}
                 />
             ))}
         
@@ -81,18 +59,14 @@ export default function ModuleNode({ data }) {
             <div id="moduleContainer" style={rootStyle}>
                 
                 {/*MODULE HEADER*/}
-                <div id="moduleHeader">
+                <div id="preHeader">
                     <p>{name}</p>
                     <ModuleType module_type={type}/>
                 </div>
 
                 {/*MODULE INPUTS*/}
-                <div id="moduleInputs" className='input-output'>
+                <div id="moduleIO" className='pre-input-output'>
                     <MultiIO data={inputs} io="input"/>
-                </div>
-
-                {/*MODULE OUTPUTS*/}
-                <div id="moduleOutputs" className='input-output'>
                     <MultiIO data={outputs} io="output"/>
                 </div>
 
@@ -134,10 +108,6 @@ function ModuleInput(props) {
     return (
         <div id="moduleInput">
             <IOtype io_type={props.data_type}/> {/*input type*/}
-            
-            <p className='io-name'>{props.data_var}</p> {/*input variable*/}
-            
-            <div id="ioSpacer"></div>
         </div>
     );
 }
@@ -145,10 +115,6 @@ function ModuleInput(props) {
 function ModuleOutput(props) {
     return (
         <div id="moduleOutput">
-            <div id="ioSpacer"></div>
-
-            <p className='io-name'>{props.data_var}</p> {/*output variable*/}
-
             <IOtype io_type={props.data_type}/> {/*output type*/}
         </div>
     );
@@ -158,7 +124,7 @@ function ModuleOutput(props) {
 /* TYPE INDICATORS - Renders type indicators (input/output type and module type) */
 function IOtype(props) {
     return (
-        <div className='io-type'>
+        <div className='pre-io-type'>
             {(props.io_type).toUpperCase()}
         </div>
     )
@@ -166,7 +132,7 @@ function IOtype(props) {
 
 function ModuleType(props) {
     return (
-        <div id="moduleType">
+        <div id="preTag">
             {props.module_type}
         </div>
     )

@@ -1,0 +1,82 @@
+/*
+    PRE NODES: CSS
+    __Styling for module ReactFlow nodes__
+*/
+
+/*MODULE HEADER*/
+#preHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 6px 13px;
+    padding-bottom: 4px;
+
+    font-family: Berka;
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--color)
+}
+
+/*Module type*/
+#preTag {
+    background-color: var(--color);
+    opacity: 0.9;
+
+    border-radius: 7px;
+
+    height: 9px;
+    
+    padding: 3px 4px;
+    
+    font-size: 4px;
+    font-weight: bold;
+    color: #FFFFFF;
+    line-height: 0;
+        font-family: Arial;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-left: 10px;
+}
+
+#moduleIO {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/*io types*/
+.pre-io-type {
+    border-radius: 9px;
+    background-color: #F1F1F1;
+    height: 8px;
+
+    /*IO type font styling*/
+    font-size: 4px;
+    font-style: italic;
+    color: #C0C0C0;
+    line-height: normal;
+    letter-spacing: -0.2px;
+    font-family: Arial;
+
+    padding-left: 5px;
+    padding-right: 5px;
+
+    margin: 5px 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pre-input-output {
+    border-top: 0.5px solid #E9E9E9;
+    border-bottom: 0.5px solid #E9E9E9;
+
+    margin-bottom: 6px;
+}
+

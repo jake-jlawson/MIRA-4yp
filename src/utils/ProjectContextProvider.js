@@ -39,7 +39,7 @@ export function ProjectProvider({ children }) {
             dateLastOpened: ""
         },
         data: {
-            system: [],
+            system: {nodes: [], edges: []},
             dataset: [],
             views: [],
             tests: []
@@ -153,7 +153,7 @@ export function ProjectProvider({ children }) {
                 dateLastOpened: ""
             },
             data: {
-                system: [],
+                system: {nodes: [], edges: []},
                 dataset: [],
                 views: [],
                 tests: []
@@ -179,6 +179,22 @@ export function ProjectProvider({ children }) {
             callback(data);
         })
     }
+
+
+    // Global method for updating the project system
+    const updateSystem = (system_data) => {
+        
+        const updatedState = { ...project };
+
+        updatedState.data = {
+            ...updatedState.data,
+            system: system_data
+          };
+
+        console.log("Updated State", updatedState);
+        
+        setProject(updatedState);
+    }
     
 
     
@@ -190,7 +206,8 @@ export function ProjectProvider({ children }) {
         saveProject, 
         closeProject,
         updateProject,
-        getProjects
+        getProjects,
+        updateSystem
     } 
     
     return (

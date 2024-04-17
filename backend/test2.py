@@ -1,5 +1,5 @@
 from processing.ModuleManager import ModuleManager
-from modules.ProcessingModule import *
+from backend.modules.Modules import *
 
 
 MODULE_MANAGER = ModuleManager()

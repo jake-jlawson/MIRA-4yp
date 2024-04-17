@@ -1,4 +1,4 @@
-from modules.ProcessingModule import *
+from backend.modules.Modules import *
 from modules.ProcessingTypes import *
 
 from modules.UtilityModules.SimpleSource import *

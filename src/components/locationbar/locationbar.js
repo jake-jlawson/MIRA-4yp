@@ -8,6 +8,7 @@ import { Breadcrumbs } from "baseui/breadcrumbs";
 import { StyledLink } from "baseui/link";
 
 import { useProject } from '../../utils/ProjectContextProvider';
+import { useProcessor } from '../../utils/ProcessingContextProvider';
 
 
 export default function LocationBar(props) {
@@ -39,10 +40,17 @@ export default function LocationBar(props) {
 
 function BackButton() {
     
-    const { closeProject } = useProject();
+    const { project, closeProject, saveProject } = useProject();
+    const { clearProcessingChain } = useProcessor();
+
+    const clearProject = () => {
+        saveProject();
+        closeProject();
+        clearProcessingChain();
+    }
     
     return (
-        <div id="backButton" onClick={closeProject}>
+        <div id="backButton" onClick={clearProject}>
             <ChevronLeft size={25}/>
         </div>
     )

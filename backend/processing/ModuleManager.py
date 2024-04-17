@@ -80,7 +80,8 @@ class ModuleManager:
                     'module_name': module['module_name'],
                     'module_type': module['module_type'],
                     'module_inputs': {key: value.__name__ for key, value in module['module_inputs'].items()},
-                    'module_outputs': {key: value.__name__ for key, value in module['module_outputs'].items()}
+                    'module_outputs': {key: value.__name__ for key, value in module['module_outputs'].items()},
+                    'module_params': module['module_params'],
                 }
 
                 json_serialisable_data.append(converted_module)
@@ -117,7 +118,8 @@ class ModuleManager:
             "module_name": "",
             "module_type": "",
             "module_inputs": "",
-            "module_outputs": ""
+            "module_outputs": "",
+            "module_params": ""
         }
 
         for key in module_info:

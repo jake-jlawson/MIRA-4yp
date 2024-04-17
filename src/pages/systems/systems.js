@@ -20,27 +20,37 @@ import ModulesLibrary from './systems-builder-components/ModulesLibrary';
 
 
 // REACTFLOW NODE IMPORTS
-import ModuleNode from './systems-builder-components/ModuleNodes'
+import ModuleNode from './systems-builder-components/nodes/ModuleNodes';
+import PreNode from './systems-builder-components/nodes/PreNodes';
+import SourceNode from './systems-builder-components/nodes/SourceNodes';
+import StoreNode from './systems-builder-components/nodes/StoreNodes';
+
 import { useProcessor } from '../../utils/ProcessingContextProvider';
+import { useProject } from '../../utils/ProjectContextProvider';
 
 
 
-
-const initialNodes = []
-
-const nodeTypes = { moduleNode: ModuleNode };
+const nodeTypes = { moduleNode: ModuleNode, preNode: PreNode, srcNode: SourceNode, storeNode: StoreNode };
 const proOptions = { hideAttribution: true };
 
 let id = 0;
 const getId = () => `node_${id++}`;
 
 
-// SIDEBAR COMPONENT
+
+// SYSTEMS WORKSPACE COMPONENT
 export default function SystemsWorkspace(props) {
 
+    //Import contexts
+    const { processingModules, updateProcessingChain, chainNodes, chainEdges } = useProcessor();
+    const { project, updateSystem } = useProject();
+
+    console.log("chainNodes:", chainNodes); // Check if chainNodes is defined
+    console.log("chainEdges:", chainEdges); // Check if chainEdges is defined
+
     const reactFlowWrapper = useRef(null);
-    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-    const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+    const [nodes, setNodes, onNodesChange] = useNodesState(chainNodes);
+    const [edges, setEdges, onEdgesChange] = useEdgesState(chainEdges);
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
     // const onNodesChange = useCallback(
@@ -51,15 +61,45 @@ export default function SystemsWorkspace(props) {
     //     (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     //     [setEdges]
     // );
+
     const onConnect = useCallback(
         (connection) => setEdges((eds) => addEdge(connection, eds)),
         [setEdges]
     );
 
 
-    // Allow Modules Library to add nodes
-    const { processingModules } = useProcessor();
+    useEffect(() => {
+        console.log("chainNodes", chainNodes)
+        console.log("chainEdges", chainEdges)
+    }, [])
 
+
+    //update global processing chain and project processing chain
+    const firstRender = useRef(true);
+
+
+    useEffect(() => {
+        
+        if (firstRender.current) {
+            console.log('first render!')
+            firstRender.current = false;
+            return;
+        }
+        
+        updateProcessingChain(nodes, edges); //update global processing chain
+
+        updateSystem({nodes: nodes, edges: edges});
+
+    }, [nodes, edges])
+
+
+    // useEffect(() => {
+    //     setNodes(chainNodes);
+    //     setEdges(chainEdges);
+    // }, [project])
+
+
+    // Allow Modules Library to add nodes
     const handleDrop = useCallback((event) => {
         
         // data required to instantiate module
@@ -71,12 +111,20 @@ export default function SystemsWorkspace(props) {
                 y: event.clientY
             });
             
+            let module_data = processingModules[module_name];
+            let module_type = 'moduleNode';
 
-            console.log(module_name);
-            console.log(cursorPosition);
+            if (module_data.module_type == "PRE") {
+                module_type = 'preNode';
+            }
+            if (module_data.module_type == "SRC") {
+                module_type = 'srcNode';
+            }
+            if (module_data.module_type == "STORE") {
+                module_type = 'storeNode'
+            }
 
-            let new_node = { id: getId(), type: 'moduleNode', position: cursorPosition, data: processingModules[module_name] }
-            console.log(new_node);
+            let new_node = { id: getId(), type: module_type, position: cursorPosition, data: module_data }
 
             setNodes((nds) => nds.concat(new_node));
         }

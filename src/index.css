@@ -19,7 +19,9 @@ body { /*Application Body CSS*/
     font-family: 'Berka';
     src: local('Berka'),
          url('./assets/fonts/Berka-ExtraBold.woff') format('woff'),
+         url('./assets/fonts/Berka-Light.woff2') format('woff2'),
   }
+  
   margin: 0px;
 }
 

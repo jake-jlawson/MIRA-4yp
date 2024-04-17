@@ -27,6 +27,7 @@ def getModules():
 
     MODULE_MANAGER.reload()
     json_serialisable_modules_list = MODULE_MANAGER.getModules()
+    # print(json_serialisable_modules_list, flush=True)
 
     return jsonify(json_serialisable_modules_list)
 

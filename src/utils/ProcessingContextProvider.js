@@ -5,7 +5,9 @@
 
 /* IMPORTS */
 import React from "react";
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
+
+import { useProject } from './ProjectContextProvider';
 
 /* Processing Context */
 const ProcessorContext = createContext({});
@@ -19,7 +21,21 @@ export function useProcessor() {
 
 export function ProcessorProvider({ children }) {
 
+    const { project } = useProject();
+    console.log(project.data.system);
+    
     const [processingModules, setProcessingModules] = useState(false);
+    const [chainNodes, updateChainNodes] = useState([]);
+    const [chainEdges, updateChainEdges] = useState([]);
+
+
+    useEffect(() => {
+        console.log("Project Nodes", project.data.system.nodes);
+        console.log("Project Edges", project.data.system.edges)
+        updateChainNodes(project.data.system.nodes);
+        updateChainEdges(project.data.system.edges);
+    }, [project])
+
 
 
     const setGlobalModules = (modules_object) => {
@@ -32,16 +48,30 @@ export function ProcessorProvider({ children }) {
             modules_list[element.label] = element
         });
 
-        console.log(modules_list)
-
         setProcessingModules(modules_list) //get global modules
     }
+
+    //Function calls an update of the global processing chain
+    const updateProcessingChain = (nodes, edges) => {
+        updateChainNodes(nodes);
+        updateChainEdges(edges);
+    }
+
+    const clearProcessingChain = () => {
+        updateChainNodes([]);
+        updateChainEdges([]);
+    }
+
 
 
 
     const processorContextValue = { //expose interface
         processingModules,
-        setGlobalModules
+        setGlobalModules,
+        updateProcessingChain,
+        clearProcessingChain,
+        chainNodes,
+        chainEdges
     } 
     
     return (

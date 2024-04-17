@@ -11,7 +11,7 @@
     ! - The class must define information, such as module_name, module_type, module_inputs and module_outputs
     ! - The main interface class must have the same name as the file
 '''
-from modules.ProcessingModule import *
+from backend.modules.Modules import *
 from modules.ProcessingTypes import * 
 __all__ = ["ModuleName"] #must be set to only your module name to ensure only the module interface is available for import
 

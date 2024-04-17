@@ -13,18 +13,24 @@
 '''
 from modules.Modules import ProcessingModule
 from modules.ProcessingTypes import * 
-__all__ = ["UserModule1"] #must be set to only your module name to ensure only the module interface is available for import
+__all__ = ["HarmonicAnalyser"] #must be set to only your module name to ensure only the module interface is available for import
 
 
 # FURTHER IMPORTS
 
 
 # Processing Module Interface Definition
-class UserModule1(ProcessingModule):
-    module_name = "UserModule1"
-    module_type = ""
-    module_inputs = {}
-    module_outputs = {}
+class MelodicGrouping(ProcessingModule):
+    module_name = "MelodicGrouping"
+    module_type = "E1"
+    module_inputs = {
+        "melody1": MIDI,
+        "melody2": MIDI,
+        "melody3": MIDI
+    }
+    module_outputs = {
+        "melodic_groups": MIDI
+    }
     module_params = {}
     
     def __init__():

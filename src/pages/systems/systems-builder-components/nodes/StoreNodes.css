@@ -1,0 +1,77 @@
+#storeContainer {
+    /*borders, background and shadow*/
+    background-color: var(--color);
+    border-radius: 6px;
+ 
+    -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.1);
+ 
+    /*flex-properties*/
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+
+    padding: 3px;
+}
+
+#storeTag {
+    background-color: #484848;
+    opacity: 0.9;
+
+    border-radius: 7px;
+
+    height: 9px;
+    
+    padding: 3px 4px;
+    
+    font-size: 4px;
+    font-weight: bold;
+    color: #FFFFFF;
+    line-height: 0;
+        font-family: Arial;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 3px;
+}
+
+#storeDataInput {
+    background: white;
+
+    width: auto;
+    min-width: 80px;
+    height: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: left;
+
+    border-radius: 6px;
+    padding-left: 6px;
+}
+
+/*io types*/
+.store-in-type {
+    border-radius: 9px;
+    background-color: #F1F1F1;
+    height: 8px;
+
+    /*IO type font styling*/
+    font-size: 4px;
+    font-style: italic;
+    color: #C0C0C0;
+    line-height: normal;
+    letter-spacing: -0.2px;
+    font-family: Arial;
+
+    padding-left: 5px;
+    padding-right: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

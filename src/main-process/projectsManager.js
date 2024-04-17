@@ -36,6 +36,8 @@ class Project {
             "data": project_data.data
         }
 
+        console.log(newProjectData)
+
         newProjectData["path"] = file_path; // add file path to project data
         this.log_data(newProjectData);
 

@@ -8,7 +8,7 @@
 '''
 
 # PROCESSING MODULE IMPORTS
-from modules.ProcessingModule import *
+from modules.Modules import ProcessingModule
 from modules.ProcessingTypes import * 
 
 __all__ = ["SimpleSource"] #must be set to your module name to ensure only the module interface is available for import
@@ -21,13 +21,15 @@ class SimpleSource(ProcessingModule):
 
     # Module information
     module_name = "SimpleSource"
-    module_type = "UTIL"
+    module_type = "SRC"
 
     module_inputs = {}
 
     module_outputs = {
         "source_audio": Audio
     }
+
+    module_params = {}
 
 
     def __init__(self, song):

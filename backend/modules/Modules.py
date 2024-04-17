@@ -2,6 +2,12 @@ from typing import Type, Dict, List
 from abc import ABC, abstractmethod
 
 
+'''
+    PROCESSING MODULE BASE CLASS:
+    For any module that intends to do complex processing
+'''
+__all__ = ["ProcessingModule", "SourceModule"]
+
 class ProcessingModule(ABC):
 
     """
@@ -53,7 +59,3 @@ class ProcessingModule(ABC):
     @abstractmethod
     def process(self, **kwargs):
         ...
-    
-
-    
-

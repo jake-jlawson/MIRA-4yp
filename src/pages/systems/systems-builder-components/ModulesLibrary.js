@@ -31,8 +31,6 @@ const updateModules = (state_data, modules_data) => {
         element.children = modules_data[module_type]
     });
 
-    console.log(init_state)
-
     return init_state
 }
 

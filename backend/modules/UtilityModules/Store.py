@@ -8,31 +8,28 @@
 '''
 
 # PROCESSING MODULE IMPORTS
-from modules.ProcessingModule import *
+from modules.Modules import ProcessingModule
 from modules.ProcessingTypes import * 
+from typing import Any
 
-__all__ = ["Demix"] #must be set to your module name to ensure only the module interface is available for import
+__all__ = ["Store"] #must be set to your module name to ensure only the module interface is available for import
 
 # ANY FURTHER IMPORTS
 
 
 # Processing Module Interface Definition
-class Demix(ProcessingModule):
+class Store(ProcessingModule):
 
-    module_name = "Demix"
-    module_type = "UTIL"
+    module_name = "Store"
+    module_type = "STORE"
 
     module_inputs = {
-        "source_audio": Audio,
-    } #takes and audio source as an input
+        "data": Any,
+    } #takes in any datatype to store in the database
 
-    module_outputs = {
-        "main":Audio,
-        "vocals": Audio,
-        "comp": Audio,
-        "bass": Audio,
-        "drums": Audio
-    } #returns 4 parts: vocals, accompaniment, bass, drums
+    module_outputs = {} 
+
+    module_params = {}
     
 
     def __init__(self):

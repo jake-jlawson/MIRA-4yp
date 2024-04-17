@@ -11,37 +11,42 @@
 from modules.Modules import ProcessingModule
 from modules.ProcessingTypes import * 
 
-__all__ = ["LowPass"] #must be set to your module name to ensure only the module interface is available for import
+__all__ = ["Demix"] #must be set to your module name to ensure only the module interface is available for import
 
 # ANY FURTHER IMPORTS
 
 
 # Processing Module Interface Definition
-class LowPass(ProcessingModule):
+class Demix(ProcessingModule):
 
-    module_name = "LowPass"
-    module_type = "PRE"
-    
+    module_name = "Demix"
+    module_type = "UTIL"
+
     module_inputs = {
-        "input": Audio
-    }
+        "source_audio": Audio,
+    } #takes and audio source as an input
 
     module_outputs = {
-        "output": Audio
-    }
+        "main":Audio,
+        "vocals": Audio,
+        "comp": Audio,
+        "bass": Audio,
+        "drums": Audio
+    } #returns 4 parts: vocals, accompaniment, bass, drums
 
     module_params = {}
-
+    
 
     def __init__(self):
-        super().__init__()
-        print(self, flush=True)
         return
     
 
     def process(sourceAudio: Audio):
         return {
-            "audio_out": [],
+            "vocals": [],
+            "accompaniment": [],
+            "bass": [],
+            "drums": []
         }
 
 
