@@ -44,11 +44,12 @@ def runSystem():
     chain_data = request.json
     chain_nodes = chain_data["nodes"]
     chain_edges = chain_data["edges"]
+    print(chain_nodes, flush=True)
 
     processing_chain = ProcessingChain(chain_nodes, chain_edges, modules=MODULE_MANAGER.loaded_modules)
 
     processor = Processor(processing_chain, global_vars["DATASET"])
-    processor.execute(iters=1)
+    processor.execute(iters=3)
 
 
     return "System Running!"

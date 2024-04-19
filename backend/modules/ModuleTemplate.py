@@ -22,8 +22,7 @@ TYPES = {
     "event1": "E1"
 }
 
-__all__ = [MODULE_NAME] #must be set to only your module name to ensure only the module interface is available for import
-
+__all__ = [MODULE_NAME] 
 
 # FURTHER IMPORTS
 
@@ -34,7 +33,6 @@ class ModuleName(ProcessingModule):
     module_type = TYPES[""]
     module_inputs = {}
     module_outputs = {}
-
     module_params = {}
     
 

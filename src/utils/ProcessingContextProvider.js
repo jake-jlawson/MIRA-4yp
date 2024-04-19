@@ -22,7 +22,6 @@ export function useProcessor() {
 export function ProcessorProvider({ children }) {
 
     const { project } = useProject();
-    console.log(project.data.system);
     
     const [processingModules, setProcessingModules] = useState(false);
     const [chainNodes, updateChainNodes] = useState([]);
@@ -30,8 +29,6 @@ export function ProcessorProvider({ children }) {
 
 
     useEffect(() => {
-        console.log("Project Nodes", project.data.system.nodes);
-        console.log("Project Edges", project.data.system.edges)
         updateChainNodes(project.data.system.nodes);
         updateChainEdges(project.data.system.edges);
     }, [project])
@@ -71,7 +68,8 @@ export function ProcessorProvider({ children }) {
         updateProcessingChain,
         clearProcessingChain,
         chainNodes,
-        chainEdges
+        chainEdges,
+        updateChainNodes
     } 
     
     return (

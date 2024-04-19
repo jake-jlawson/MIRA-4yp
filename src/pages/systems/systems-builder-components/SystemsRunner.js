@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import socketIOClient from 'socket.io-client';
 import { useProcessor } from '../../../utils/ProcessingContextProvider'; //project context
 
 import './SystemsRunner.css'; //projects page css
@@ -16,24 +17,55 @@ import { ProgressBar } from "baseui/progress-bar";
 /*SYSTEMS RUNNER COMPONENT*/
 export default function SystemsRunner() {
     
-    const [progress, setProgress] = useState(60);
+    const [systemRunning, setSystemRunning] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [progressTxt, setProgressTxt] = useState("");
 
     const { chainNodes, chainEdges } = useProcessor();
     
 
+    useEffect(() => {
+        const socket = socketIOClient('http://127.0.0.1:2000');
+
+        socket.on('progress_update', (data) => {
+            let progress = data.progress
+            let progress_text = data.update_txt
+
+            setProgress(prevProgress => prevProgress + progress)
+            setProgressTxt(progress_text)
+        })
+
+        socket.on('process-complete', (data) => {
+            setProgress(data.progress)
+            setProgressTxt(data.update_txt)
+
+            setTimeout(() => {
+                setSystemRunning(false)
+                return () => socket.disconnect()
+            }, 2000)  
+        })
+    }, [])
+
+
     const runSystem = () => {
-       
-        axios.post('http://127.0.0.1:2000/processing/run-system', {nodes: chainNodes, edges: chainEdges})
         
-        console.log(chainNodes);
-        console.log(chainEdges);
+        if (systemRunning == false) {
+            setSystemRunning(true)
+            axios.post('http://127.0.0.1:2000/processing/run-system', {nodes: chainNodes, edges: chainEdges})
+        } else {
+            return
+        }
+        
     }
     
+
     return (
         <div id="systemsRunnerContainer">
             
+            {systemRunning ? 
+            
             <div id="progressUI">
-                <p id="statusUpdate" className='status-signal'>Loading Processing Chain...</p>
+                <p id="statusUpdate" className='status-signal'>{progressTxt}</p>
                 <ProgressBar 
                     value={progress}
                     className='status-signal'
@@ -48,9 +80,13 @@ export default function SystemsRunner() {
                                 marginTop: "0px",
                             }
                         }
-                    }}/>
-            </div>
+                    
+                    }}
+                    maxValue={10}
+                />
+            </div> : <></>}
             
+
             <Button
                 size={SIZE.compact}
                 overrides={{

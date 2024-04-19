@@ -36,10 +36,10 @@ class SimpleSource(ProcessingModule):
         return
 
 
-    def process(self, inputs: dict):
+    def process(self, inputs: dict, song):
 
         print("SimpleSource module running!")
         
         return {
-            "source_audio": "This is some source audio"
+            "source_audio": Audio(song.audioData["main"])
         }

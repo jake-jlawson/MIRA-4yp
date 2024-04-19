@@ -46,6 +46,7 @@
     "react-router": "^6.22.3",
     "react-router-dom": "^6.22.3",
     "reactflow": "^11.11.1",
+    "socket.io-client": "^4.7.5",
     "styletron-engine-atomic": "^1.6.2",
     "styletron-engine-monolithic": "^1.0.0",
     "styletron-react": "^6.1.1"

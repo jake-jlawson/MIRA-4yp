@@ -8,10 +8,14 @@
 # PACKAGE IMPORTS 
 from flask import Flask
 from database.DataManager import *
+from flask_socketio import SocketIO
+from global_vars import global_vars
 
 
 
 app = Flask(__name__) #define app
+socketio = SocketIO(app)
+global_vars["SOCKETIO"] = socketio
 
 
 
@@ -36,4 +40,4 @@ def hello():
     RUN SERVER
 '''
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=2000)
+    socketio.run(app, host='127.0.0.1', port=2000, allow_unsafe_werkzeug=True)

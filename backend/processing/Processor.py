@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 # MODULE IMPORTS
 from database.DataManager import *
 from modules.ProcessingTypes import *
+from processing.ProgressUpdates import ProgressEmitter
 
 
 '''
@@ -26,6 +27,8 @@ class ProcessingChain():
     # CONSTRUCT PROCESSING CHAIN NODE STRUCTURE - from nodes and edges data
     def construct(self, nodes, edges, modules):
         chain = nx.MultiDiGraph()
+
+        print(modules)
 
         #instantiate nodes
         for node in nodes:
@@ -89,9 +92,12 @@ class Processor():
 
     def __init__(self, processing_chain: ProcessingChain, dataset: Dataset):
         self.chain = processing_chain.chain
+        self.dataset_obj = dataset
         self.dataset = dataset.db
 
         self.process_layers = list(nx.topological_generations(self.chain)) #get layers to execute
+
+        self.emitter = ProgressEmitter()
         
     
     def execute(self, iters=-1):
@@ -102,11 +108,16 @@ class Processor():
 
         # If max iterations set, iterate through the whole dataset
         if (iters == -1) or (iters > dataset_entries):
+
             for db_id in self.dataset:
                 source = SongSource()
                 song = source.load(self.dataset, db_id)
 
                 self.run_chain(song) #run the processing chain
+                
+                (self.emitter).emit_progress(1, "Chain run on " + song.title)
+            
+            (self.emitter).emit_complete()
             return
         
         # If specific number of iterations set, iterate that many times
@@ -121,9 +132,13 @@ class Processor():
 
 
                 iteration_count += 1
+
+                (self.emitter).emit_progress(1, "Chain run on " + song.title)
+
                 if iteration_count >= iters:
                     break  # Exit the loop if the maximum limit is reached
             
+            (self.emitter).emit_complete()
             return
         
 
@@ -137,11 +152,21 @@ class Processor():
             
             node = self.chain.nodes[node_name]
             node_object = node["node_obj"] #get the node object
-            
-            #run the node with the inputs
-            result = node_object.run(inputs)
-            print(result)
 
+            (self.emitter).emit_progress(0, "Running " + node_object.module_name + "...")
+
+
+            #Handle special modules
+            match node_object.module_name:
+                case "Demix":
+                    result = node_object.module.process(inputs, dataset=self.dataset_obj, song=song)
+
+                case "SimpleSource":
+                    result = node_object.module.process(inputs, song=song)
+
+                case _:
+                    result = node_object.run(inputs)
+            
 
             #map outgoing edges to correct module data
             out_edges = self.chain.out_edges(node_name, data=True)

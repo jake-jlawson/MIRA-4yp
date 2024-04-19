@@ -5,7 +5,7 @@ from couchdb.mapping import Document, TextField, IntegerField, ListField, DictFi
 
 class Audio():
     def __init__(self, audio_file_source):
-        self.source = audio_file_source
+        self.source_path = audio_file_source
     
 class MIDI():
     def __init__(self):

@@ -5,5 +5,6 @@ from database.DataManager import *
 #store global variables
 global_vars = {
     "MODULE_MANAGER": ModuleManager(),
-    "DATASET": None
+    "DATASET": None,
+    "SOCKETIO": None
 }

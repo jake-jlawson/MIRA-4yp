@@ -52,6 +52,7 @@
 
     border-radius: 6px;
     padding-left: 6px;
+    padding-right: 10px;
 }
 
 /*io types*/
@@ -74,4 +75,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#storeVarInput {
+    border: none; /* Remove border */
+    background-color: inherit; /* Inherit background color */
+    width: 90px;
+    flex-grow: 0;
+    box-sizing: content-box;
+
+    font-size: 10px;
+}
+
+#storeVarInput:focus {
+    outline: none;
 }

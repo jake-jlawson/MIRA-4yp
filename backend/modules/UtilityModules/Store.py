@@ -29,7 +29,9 @@ class Store(ProcessingModule):
 
     module_outputs = {} 
 
-    module_params = {}
+    module_params = {
+        "featureID": ""
+    }
     
 
     def __init__(self):

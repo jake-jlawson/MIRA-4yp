@@ -46,9 +46,6 @@ export default function SystemsWorkspace(props) {
     const { processingModules, updateProcessingChain, chainNodes, chainEdges } = useProcessor();
     const { project, updateSystem } = useProject();
 
-    console.log("chainNodes:", chainNodes); // Check if chainNodes is defined
-    console.log("chainEdges:", chainEdges); // Check if chainEdges is defined
-
     const reactFlowWrapper = useRef(null);
     const [nodes, setNodes, onNodesChange] = useNodesState(chainNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(chainEdges);
@@ -69,26 +66,18 @@ export default function SystemsWorkspace(props) {
     );
 
 
-    useEffect(() => {
-        console.log("chainNodes", chainNodes)
-        console.log("chainEdges", chainEdges)
-    }, [])
-
 
     //update global processing chain and project processing chain
     const firstRender = useRef(true);
 
 
     useEffect(() => {
-        
         if (firstRender.current) {
-            console.log('first render!')
             firstRender.current = false;
             return;
         }
         
         updateProcessingChain(nodes, edges); //update global processing chain
-
         updateSystem({nodes: nodes, edges: edges});
 
     }, [nodes, edges])
