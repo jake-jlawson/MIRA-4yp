@@ -49,7 +49,7 @@ def runSystem():
     processing_chain = ProcessingChain(chain_nodes, chain_edges, modules=MODULE_MANAGER.loaded_modules)
 
     processor = Processor(processing_chain, global_vars["DATASET"])
-    processor.execute(iters=3)
+    processor.execute(iters=1)
 
 
     return "System Running!"

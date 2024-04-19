@@ -78,7 +78,7 @@ class Demix(ProcessingModule):
             demixed_parts = self.demix(audio_src_path)
             self.save_parts(demixed_parts)
 
-        print(self.data_out)
+
         return self.data_out
 
     

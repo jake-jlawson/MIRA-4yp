@@ -6,6 +6,11 @@ from couchdb.mapping import Document, TextField, IntegerField, ListField, DictFi
 class Audio():
     def __init__(self, audio_file_source):
         self.source_path = audio_file_source
+
+    # FORMAT METHOD - Returns type data in a format that can be stored in the database
+    def format(self):
+        return self.source_path
+    
     
 class MIDI():
     def __init__(self):

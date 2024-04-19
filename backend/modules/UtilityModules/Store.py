@@ -38,12 +38,21 @@ class Store(ProcessingModule):
         return
     
 
-    def process(self, inputs: dict):
+    def process(self, inputs: dict, params: dict, dataset, song: SongSource):
         
+        store_data = inputs["data"]
+        store_data_type = type(store_data).__name__
+
+        # set feature attributes and data
+        feature_name = params["featureID"]
+        feature_data = store_data.format()
+
+        feature_packet = {"type": store_data_type, "data": feature_data}
+
+
+        # store feature in the dataset
+        song.features[feature_name] = feature_packet
+        song.store(dataset)
+
         print("Data Stored!")
-        
-
-
-
-# Any further code required by the processing module
 

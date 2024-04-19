@@ -66,6 +66,9 @@ class ProcessingNode():
         self.id = node_data["id"]
         self.inputs = node_data["data"]["module_inputs"]
         self.module_name = node_data["data"]["module_name"]
+
+        if ("module_params" in node_data["data"]):
+            self.module_params = node_data["data"]["module_params"]
         
         #Instantiate the Node processing module
         module_class = getattr(module, self.module_name)
@@ -163,6 +166,10 @@ class Processor():
 
                 case "SimpleSource":
                     result = node_object.module.process(inputs, song=song)
+
+                case "Store":
+                    node_object.module.process(inputs, dataset=self.dataset, song=song, params=node_object.module_params)
+                    result = None
 
                 case _:
                     result = node_object.run(inputs)
