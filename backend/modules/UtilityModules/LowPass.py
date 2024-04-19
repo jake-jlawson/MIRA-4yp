@@ -39,9 +39,12 @@ class LowPass(ProcessingModule):
         return
     
 
-    def process(sourceAudio: Audio):
+    def process():
+        
+        print("LowPass Running!")
+        
         return {
-            "audio_out": [],
+            "output": [],
         }
 
 

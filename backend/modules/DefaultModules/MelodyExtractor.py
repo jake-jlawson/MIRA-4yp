@@ -31,9 +31,16 @@ class MelodyExtractor(ProcessingModule):
     }
     module_params = {}
     
-    def __init__():
+    def __init__(self):
         return
 
+    def process(self, inputs: dict):
+        print("MelodyExtractor Running!")
+        print(inputs)
+
+        return {
+            "melody": "This is a melody!"
+        }
 
 
 # Any further code required by the processing module

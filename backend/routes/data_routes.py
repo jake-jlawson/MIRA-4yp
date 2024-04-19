@@ -5,6 +5,10 @@
 from flask import Blueprint, request, jsonify, g
 from database.DataManager import *
 
+#import global variables
+from global_vars import global_vars
+
+
 data_bp = Blueprint('data', __name__) #define blueprint to be imported
 
 
@@ -48,6 +52,7 @@ def openDataset():
     
     global DATASET
     DATASET = Dataset(dataset_name)
+    global_vars["DATASET"] = DATASET
 
     return "Dataset Opened Successfully!"
 
@@ -68,5 +73,6 @@ def closeDataset():
     
     global DATASET
     DATASET = ""
+    global_vars["DATASET"] = DATASET
 
     return "Dataset Closed"

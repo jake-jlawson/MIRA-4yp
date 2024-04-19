@@ -33,8 +33,17 @@ class MelodicGrouping(ProcessingModule):
     }
     module_params = {}
     
-    def __init__():
+    def __init__(self):
         return
+    
+    def process(self, inputs: dict):
+        print("Melodic Grouping Running!")
+
+        print(inputs)
+
+        return {
+            "melodic_groups": "These are some melodic groups"
+        }
 
 
 

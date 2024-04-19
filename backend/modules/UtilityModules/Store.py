@@ -36,14 +36,10 @@ class Store(ProcessingModule):
         return
     
 
-    def process(sourceAudio: Audio):
-        return {
-            "vocals": [],
-            "accompaniment": [],
-            "bass": [],
-            "drums": []
-        }
-
+    def process(self, inputs: dict):
+        
+        print("Data Stored!")
+        
 
 
 

@@ -90,3 +90,9 @@ typings/
 
 # Electron-Forge
 out/
+
+# Python venv
+backend/venv/
+
+# Ignore python cache
+backend/__pycache__/

@@ -1,0 +1,34 @@
+/*  SYSTEMS CSS
+    __Provides interface for controlling the execution of processing chains__*/
+
+#systemsRunnerContainer {
+    
+    /*positioning*/
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+
+    /*flex settings*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#progressUI {
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#statusUpdate {
+    font-size: 10px;
+    font-style: italic;
+
+    margin-left: 12px;
+}
+
+.status-signal {
+    flex-grow: 0;
+}

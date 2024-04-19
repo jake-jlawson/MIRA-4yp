@@ -17,6 +17,7 @@ import 'reactflow/dist/style.css';
 
 
 import ModulesLibrary from './systems-builder-components/ModulesLibrary';
+import SystemsRunner from './systems-builder-components/SystemsRunner';
 
 
 // REACTFLOW NODE IMPORTS
@@ -159,6 +160,8 @@ export default function SystemsWorkspace(props) {
                     <Background id="1" gap={10} color="#f1f1f1" variant={'lines'} />
                     <Background id="2" gap={100} offset={1} color="#e9e9e9" variant={'lines'} />
                 </ReactFlow>
+
+                <SystemsRunner/>
             
             </div>
         </ReactFlowProvider>

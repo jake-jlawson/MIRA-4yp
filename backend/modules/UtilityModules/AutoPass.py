@@ -39,9 +39,13 @@ class AutoPass(ProcessingModule):
         return
     
 
-    def process(sourceAudio: Audio):
+    def process(self, inputs: dict):
+        
+        print("AutoPass Running!")
+        print(inputs)
+
         return {
-            "audio_out": [],
+            "output": "Audio that has been autopassed!",
         }
 
 

@@ -41,12 +41,17 @@ class Demix(ProcessingModule):
         return
     
 
-    def process(sourceAudio: Audio):
+    def process(self, inputs: dict):
+        
+        print("Demixer Running!")
+        print(inputs)
+        
         return {
-            "vocals": [],
-            "accompaniment": [],
-            "bass": [],
-            "drums": []
+            "main": "This is main",
+            "vocals": "This is vocals",
+            "comp": "This is comp",
+            "bass": "This is bass",
+            "drums": "This is drums"
         }
 
 

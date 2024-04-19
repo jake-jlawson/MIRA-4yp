@@ -13,7 +13,16 @@
 '''
 from backend.modules.Modules import *
 from modules.ProcessingTypes import * 
-__all__ = ["ModuleName"] #must be set to only your module name to ensure only the module interface is available for import
+
+MODULE_NAME = "ModuleName" #Module Name (must be the same as the class)
+TYPES = {
+    "source": "SRC",
+    "utility": "UTIL",
+    "event0": "E0",
+    "event1": "E1"
+}
+
+__all__ = [MODULE_NAME] #must be set to only your module name to ensure only the module interface is available for import
 
 
 # FURTHER IMPORTS
@@ -21,13 +30,20 @@ __all__ = ["ModuleName"] #must be set to only your module name to ensure only th
 
 # Processing Module Interface Definition
 class ModuleName(ProcessingModule):
-    module_name = ""
-    module_type = ""
+    module_name = MODULE_NAME
+    module_type = TYPES[""]
     module_inputs = {}
     module_outputs = {}
+
+    module_params = {}
     
+
     def __init__():
         return
+    
+
+    def process(self, inputs: dict) -> dict:
+        return {} #return value should be a dict in the same form as module_outputs
 
 
 
