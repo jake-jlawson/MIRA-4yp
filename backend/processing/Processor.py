@@ -28,8 +28,6 @@ class ProcessingChain():
     def construct(self, nodes, edges, modules):
         chain = nx.MultiDiGraph()
 
-        print(modules)
-
         #instantiate nodes
         for node in nodes:
             node_id = node["id"]
@@ -50,7 +48,10 @@ class ProcessingChain():
 
     # VISUALISE PROCESSING CHAIN GRAPH
     def visualise(self):
-        nx.draw_spring(self.chain, with_labels=True)
+        colour_map = ["#2c9e4b", "#20bfc7", "#d95c0f","#8213d6","#d95c0f","#d95c0f","#0c8ce8","#8213d6","#8213d6"]
+        nx.draw_spring(self.chain, with_labels=True, node_color=colour_map)
+        
+
         plt.show()
     
 

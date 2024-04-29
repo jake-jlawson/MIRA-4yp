@@ -10,6 +10,8 @@ host = "localhost:5984"
 
 datasets_path = "D:/4YP/Datasets"
 
+from modules.ProcessingTypes import *
+
 
 """ DATASETSDB:
     - Provides a singleton class for connecting to the CouchDB server
@@ -132,7 +134,9 @@ class DatasetManager:
         doc_id, doc_rev = (self.dataset).db.save(song.data())
 
     def get_song(self, song_id):
-        return self.dataset.db[song_id]
+        new_song = SongSource()
+        
+        return new_song.load(self.dataset.db, song_id)
 
 
 

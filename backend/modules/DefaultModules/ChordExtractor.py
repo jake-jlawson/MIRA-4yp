@@ -42,7 +42,7 @@ class ChordExtractor(ProcessingModule):
     module_params = {}
     
 
-    def __init__():
+    def __init__(self):
         return
     
 

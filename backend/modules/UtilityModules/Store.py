@@ -15,6 +15,7 @@ from typing import Any
 __all__ = ["Store"] #must be set to your module name to ensure only the module interface is available for import
 
 # ANY FURTHER IMPORTS
+import threading
 
 
 # Processing Module Interface Definition
@@ -35,7 +36,8 @@ class Store(ProcessingModule):
     
 
     def __init__(self):
-        return
+        self.lock = threading.Lock()
+        super().__init__()
     
 
     def process(self, inputs: dict, params: dict, dataset, song: SongSource):
@@ -50,9 +52,14 @@ class Store(ProcessingModule):
         feature_packet = {"type": store_data_type, "data": feature_data}
 
 
+        self.lock.acquire()
+        try:
         # store feature in the dataset
-        song.features[feature_name] = feature_packet
-        song.store(dataset)
+            song.features[feature_name] = feature_packet
+            song.store(dataset)
+            print("Data Stored!")
+        finally:
+            self.lock.release()
 
-        print("Data Stored!")
+        
 

@@ -47,6 +47,7 @@ def runSystem():
     print(chain_nodes, flush=True)
 
     processing_chain = ProcessingChain(chain_nodes, chain_edges, modules=MODULE_MANAGER.loaded_modules)
+    processing_chain.visualise()
 
     processor = Processor(processing_chain, global_vars["DATASET"])
     processor.execute(iters=1)
