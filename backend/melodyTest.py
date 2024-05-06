@@ -1,4 +1,4 @@
-from modules.DefaultModules.MelodyExtractor import *
+from backend.modules.DefaultModules.SPMelodyExtractor import *
 from modules.ProcessingTypes import *
 from database.DataManager import Dataset
 
@@ -28,7 +28,7 @@ librosa.display.waveshow(module_inputs["audio_in"].source, color="blue", ax=ax1,
 
 
 #Run Melody Extractor
-melody_extractor = MelodyExtractor()
+melody_extractor = SPMelodyExtractor()
 melody_output = melody_extractor.process(module_inputs)
 
 

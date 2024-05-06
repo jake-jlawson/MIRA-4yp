@@ -1,0 +1,41 @@
+#timeVisContainer {
+    background-color: yellow;
+
+    /* Sizing - this should be dynamic and responsive */
+    height: 300px;
+    width: auto;
+    padding: 10px;
+}
+
+
+
+
+
+/*
+TimeVis Viewing Area
+*/
+#viewer {
+    background-color: white;
+
+    width: 800px;
+    height: 100%;
+    overflow: visible;
+
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#viewingBox {
+    overflow: visible;
+}
+
+#viewingChart {
+    overflow: hidden;
+
+    background-color: blue;
+}
+
+
+

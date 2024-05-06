@@ -20,6 +20,7 @@ import { Tabs, Tab } from "baseui/tabs";
 // Component Imports
 import Datasets from '../datasets/datasets';
 import SystemsWorkspace from '../systems/systems'
+import ViewsWorkspace from '../views/views'
 
 
 /* PROJECT PAGE COMPONENT */
@@ -82,7 +83,7 @@ function ProjectsWindow() {
                     </Tab>
 
                     <Tab title="Views">
-                        This is where you can see your views
+                        <ViewsWorkspace/>
                     </Tab>
 
                     <Tab title="Tests">

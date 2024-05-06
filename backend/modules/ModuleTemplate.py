@@ -6,13 +6,14 @@
 '''
 
 '''
-    RULES:
+    ~~RULES:
     ! - __all__ must contain only 1 module and it must be the interface of your module
     ! - The class must define information, such as module_name, module_type, module_inputs and module_outputs
     ! - The main interface class must have the same name as the file
 '''
-from backend.modules.Modules import *
+from modules.Modules import ProcessingModule
 from modules.ProcessingTypes import * 
+
 
 MODULE_NAME = "ModuleName" #Module Name (must be the same as the class)
 TYPES = {
@@ -21,14 +22,16 @@ TYPES = {
     "event0": "E0",
     "event1": "E1"
 }
-
 __all__ = [MODULE_NAME] 
+
 
 # FURTHER IMPORTS
 
 
-# Processing Module Interface Definition
+# ---MODULE INTERFACE
 class ModuleName(ProcessingModule):
+    
+    # Exposes interface to the system (UI and backend) - be careful with this
     module_name = MODULE_NAME
     module_type = TYPES[""]
     module_inputs = {}
@@ -36,14 +39,18 @@ class ModuleName(ProcessingModule):
     module_params = {}
     
 
-    def __init__():
+    def __init__(self):
+        self.PARAM_DEFAULTS = {} #set default parameters
         return
     
 
-    def process(self, inputs: dict) -> dict:
+    def process(self, inputs: dict, params: dict = {}) -> dict:
+        
+        # Get inputs and parameters
+        
         return {} #return value should be a dict in the same form as module_outputs
 
 
 
-# Any further code required by the processing module
+# FURTHER CODE REQUIRED FOR MODULE GOES HERE
 

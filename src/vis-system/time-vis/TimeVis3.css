@@ -1,0 +1,49 @@
+#timeVisContainer {
+    background-color: yellow;
+
+    /* Sizing - this should be dynamic and responsive */
+    height: 300px;
+    width: 800px;
+    padding: 10px;
+}
+
+
+#viewerContainer {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/*
+TimeVis Viewing Area
+*/
+#viewer {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#viewport {
+    height: 100%;
+    width: 100%;
+    overflow: visible;
+    
+    z-index: 10;
+}
+
+#visPlot {
+    height: 100%;
+    width: 100%;
+
+    background: white;
+}
+
+
+
+

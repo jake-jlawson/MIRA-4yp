@@ -41,14 +41,15 @@ def getModules():
 # RUN SYSTEM: This route recieves the processing chain and runs it
 def runSystem():
 
+    print(global_vars["DATASET"].name, flush=True)
+
     chain_data = request.json
     chain_nodes = chain_data["nodes"]
     chain_edges = chain_data["edges"]
     print(chain_nodes, flush=True)
 
     processing_chain = ProcessingChain(chain_nodes, chain_edges, modules=MODULE_MANAGER.loaded_modules)
-    processing_chain.visualise()
-
+    
     processor = Processor(processing_chain, global_vars["DATASET"])
     processor.execute(iters=1)
 

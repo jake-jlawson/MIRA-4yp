@@ -46,7 +46,7 @@ class ChordExtractor(ProcessingModule):
         return
     
 
-    def process(self, inputs: dict) -> dict:
+    def process(self, inputs: dict, params: dict = {}) -> dict:
         return {
             "chords": []
         } #return value should be a dict in the same form as module_outputs

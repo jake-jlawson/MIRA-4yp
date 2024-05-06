@@ -24,15 +24,6 @@ DATASET = ""
 '''
     ROUTES:
 '''
-@data_bp.route('/getdata', methods=["POST"])
-def process():
-    print("Hello World!")
-    
-    test_data = request.data.decode('utf-8')
-    print(test_data)
-    return test_data + 'You have made a request to the Dataset Processing Route'
-
-
 @data_bp.route('/get-datasets-list', methods=["GET"]) 
 # RETRIEVE DATASETS: This route retrieves a list of available datasets
 def retrieveDatasets():
@@ -76,3 +67,39 @@ def closeDataset():
     global_vars["DATASET"] = DATASET
 
     return "Dataset Closed"
+
+
+@data_bp.route('/get-data', methods=["POST"])
+# GET DATA: This route recieves a request for a song and a piece of (or multiple pieces) of data from that song
+def getData():
+    
+    incoming_request = request.json
+
+
+    # parse request
+    song_id = incoming_request.get('song_id')
+    data = incoming_request.get('data')
+    args = incoming_request.get('args')
+
+    print(data)
+
+
+    # get song from dataset
+    song = DATASET.manager.get_song(song_id)
+
+    # get data from song
+    if (data in ["main", "vocals", "comp", "bass", "drums"]):
+        data_object = song.getAudio(data)
+
+    else:
+        data_object = song.getFeature(data)
+
+    
+    # Return response
+    outgoing_response = {
+        "message": "Data Retrieved Successfully!",
+        "data": data_object.transmit(args)[0],
+        "info": data_object.transmit(args)[1]
+    }
+
+    return outgoing_response

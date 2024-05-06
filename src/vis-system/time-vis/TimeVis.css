@@ -1,0 +1,57 @@
+/*
+    TIME-BASED VISUALISATIONS CSS
+*/
+#timeVisContainer {
+
+    /* background-color: yellow; */
+
+    /* Sizing - this should be dynamic and responsive */
+    height: 200px;
+    width: 90%;
+    padding: 10px;
+
+    /*Flex Settings*/
+    display: flex;
+    flex-direction: column;
+
+}
+
+#viewer {
+    padding-left: 30px;
+    height: 100%;
+}
+
+
+
+
+
+
+#viewingArea {
+    height: 100%;
+    width: 100%;
+
+    background-color: white;
+
+    flex-shrink: 1;
+}
+
+
+#visControls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: 50px;
+
+    margin-bottom: 5px;
+
+}
+
+
+
+
+#plotArea {
+    overflow: visible;
+    border: solid 2px #161616;
+}
+

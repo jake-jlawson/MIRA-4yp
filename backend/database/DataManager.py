@@ -111,6 +111,7 @@ class DatasetManager:
         try:
             song_folder_path = os.path.join((self.dataset).ds_path, song.title)
             os.mkdir(song_folder_path) #create song folder
+            song.path = song_folder_path
 
             #create subfolders
             for subfolder in subfolders:
@@ -195,6 +196,7 @@ class Song:
             # song info parsed directly from file path
             title = os.path.basename(file_source)
             self.title = os.path.splitext(title)[0]
+            self.path = ""
 
             info = parse_song_info_from_file(file_source)
             self.artists = info["artists"]

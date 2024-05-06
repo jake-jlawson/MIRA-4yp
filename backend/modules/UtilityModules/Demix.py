@@ -53,11 +53,13 @@ class Demix(ProcessingModule):
     
 
     # MAIN PROCESSING INTERFACE
-    def process(self, inputs: dict, dataset, song):
+    def process(self, inputs: dict, dataset, song, params: dict = {}):
         print("Demixer Running!") 
 
         source_audio = inputs["source_audio"]
         audio_src_path = source_audio.source_path #get file location for the audio
+
+        print(audio_src_path, flush=True)
 
         self.demix_out_folder = os.path.dirname(audio_src_path)
         self.song = song
@@ -105,11 +107,13 @@ class Demix(ProcessingModule):
             file_loc = os.path.join(self.demix_out_folder, file_name)
 
             self.song.audioData[part] = file_loc #update dataset
-            self.data_out[part] = Audio(file_loc) #update module outputs
 
             #Save Data to folder
             demucs.api.save_audio(value, path=file_loc, samplerate=self.separator.samplerate)
 
+            self.data_out[part] = Audio(file_loc) #update module outputs
+
+            
         #update song in dataset
         self.song.store(self.dataset.db)
 

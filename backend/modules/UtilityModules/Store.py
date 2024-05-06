@@ -1,10 +1,6 @@
 '''
-    PROCESSING MODULE: DEMIX
-    Module takes in an audio object and returns 4 other audio objects that represent the parts of the song after demixing.
-    The demixing algorithm used is: __________
-
-    Created by: Jake Lawson
-    MIRA Default Module
+    Store Module
+    Module stores features when they are needed
 '''
 
 # PROCESSING MODULE IMPORTS
@@ -16,20 +12,19 @@ __all__ = ["Store"] #must be set to your module name to ensure only the module i
 
 # ANY FURTHER IMPORTS
 import threading
+import simplejson as json
 
 
-# Processing Module Interface Definition
+# ---STORE MODULE INTERFACE
 class Store(ProcessingModule):
 
+    # Expose interface to the system (UI and backend)
     module_name = "Store"
     module_type = "STORE"
-
     module_inputs = {
         "data": Any,
     } #takes in any datatype to store in the database
-
     module_outputs = {} 
-
     module_params = {
         "featureID": ""
     }
@@ -40,24 +35,37 @@ class Store(ProcessingModule):
         super().__init__()
     
 
-    def process(self, inputs: dict, params: dict, dataset, song: SongSource):
-        
+    def process(self, inputs: dict, dataset, song: SongSource, params: dict = {}):
+        print("Store Module Running!")
+
+        # Get data to store
         store_data = inputs["data"]
         store_data_type = type(store_data).__name__
-
+        
         # set feature attributes and data
         feature_name = params["featureID"]
-        feature_data = store_data.format()
+        feature_data = store_data.format()[0]
+        feature_info = store_data.format()[1]
 
-        feature_packet = {"type": store_data_type, "data": feature_data}
+        store_data_loc = os.path.join(song.path, "features", feature_name + ".json") # file location to store feature data
+
+        feature_packet = {"type": store_data_type, "data": store_data_loc, "info": feature_info}
 
 
         self.lock.acquire()
         try:
-        # store feature in the dataset
+        # store feature in the dataset and file system
+            
+            # Store in filesystem
+            file_loc = os.path.join(song.path, "features", feature_name + ".json")
+            with open(file_loc, "w") as f:
+                json.dump(feature_data, f, allow_nan=False)
+
+            # Store in database
             song.features[feature_name] = feature_packet
             song.store(dataset)
             print("Data Stored!")
+
         finally:
             self.lock.release()
 

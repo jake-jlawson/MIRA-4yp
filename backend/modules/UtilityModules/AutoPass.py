@@ -39,7 +39,7 @@ class AutoPass(ProcessingModule):
         return
     
 
-    def process(self, inputs: dict):
+    def process(self, inputs: dict, params: dict = {}):
         
         print("AutoPass Running!")
         print(inputs)
