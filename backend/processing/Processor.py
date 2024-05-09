@@ -104,12 +104,25 @@ class Processor():
         self.emitter = ProgressEmitter()
         
     
-    def execute(self, iters=-1):
+    def execute(self, iters=-1, song_id=None):
         
         dataset_info = (self.dataset).info()
         dataset_entries = dataset_info["doc_count"] #count dataset entries
 
 
+        # If particular song is set, only run on that song
+        if song_id != None:
+            source = SongSource()
+            song = source.load(self.dataset, song_id)
+
+            self.run_chain(song)
+
+            (self.emitter).emit_progress(1, "Chain run on " + song.title)
+            (self.emitter).emit_complete()
+
+            return
+        
+        
         # If max iterations set, iterate through the whole dataset
         if (iters == -1) or (iters > dataset_entries):
 

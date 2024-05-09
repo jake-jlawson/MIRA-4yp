@@ -11,13 +11,13 @@ import { useProject } from '../../utils/ProjectContextProvider';
 
 /* IMPORT VISUALISATIONS*/
 import TimeVis from '../../vis-system/time-vis/TimeVis';
-import ViewPanel from './viewpanel';
+import Visualisation from './visualisation';
 
 
 export default function ViewsWorkspace() {
     return (
         <div id='viewsWorkspace'>
-            <ViewPanel />
+            <Visualisation />
         </div>
     )
 }

@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 #Get a dataset and module manager
 global DATASET;
-dataset = "ds1"
+dataset = "test-dataset"
 DATASET = Dataset(dataset)
 
 global MODULE_MANAGER;
@@ -15,9 +15,17 @@ MODULE_MANAGER = ModuleManager()
 modules = MODULE_MANAGER.load() #load modules into object
 
 
+global song_to_run;
+global song;
+song = DATASET.manager.get_song("2ee4f5b3c328cb953f1e87a691007a26")
+song_to_run = song.srcAudio(duration=30, sr=44100)
+
+
 
 class ModuleTester():
     def __init__(self, data, module_name):
+        
+        self.module_name = module_name
         
         self.inputs = data["inputs"]
         self.params = data["params"]
@@ -28,6 +36,12 @@ class ModuleTester():
 
     def test(self):
         
+        if (self.module_name == "Demix"):
+            output = (self.module).process(inputs=(self.inputs), dataset=DATASET, song=song, params=(self.params))
+            return output
+
+
+
         output = (self.module).process(inputs=(self.inputs), params=(self.params))
         
         return output
@@ -35,9 +49,7 @@ class ModuleTester():
 
 
 
-global song_to_run;
-song = DATASET.manager.get_song("84a7ffde9137e11ed123bdbd9201a231")
-song_to_run = song.vocalsAudio(duration=30, sr=44100)
+
 
 '''----------------------------------
     #----TEST SP MELODY EXTRACTOR
@@ -105,5 +117,18 @@ def testThreshold():
     plt.show()
 
 
+'''----------------------------------
+    #----TEST DEMIX
+-----------------------------------'''
+def testDemix():
+    data = {"inputs": {"source_audio": song_to_run}, "params": {"Demixing Algorithm": "Default"}} #test data
 
-testSPMelodyExtractor()
+    #Run module
+    test_output = ModuleTester(data, "Demix").test()
+
+    print(test_output)
+
+
+
+
+testDemix()

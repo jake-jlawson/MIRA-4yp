@@ -55,6 +55,10 @@ class Audio():
     def format(self):
         return self.source_path
     
+
+    def mono_src(self):
+        return librosa.to_mono(self.source)
+    
     
     
 class MIDI():
@@ -166,5 +170,42 @@ class Melody():
     def transmit(self, args):
         return self.format()
     
+
+# TIME SERIES CLASS - Represents a time series
+class TimeSeries():
+    def __init__(self, times=[], timeSeriesData=[], path=""):
+        self.data = timeSeriesData
+        self.times = times
+
+        if path != "":
+            f = open(path)
+            data = json.load(f)
+            self.data = np.array(data["data"])
+            self.times = np.array(data["times"])
+
+
+    def format(self):
+
+        data = {
+            "times": self.times.tolist(),
+            "data": self.data.tolist()
+        }
+    
+        info = {}
+
+        return [data, info]
+    
+
+    def transmit(self, args):
+        return self.format()
+
+    
+
+# TIMESTAMPS CLASS - Represents time stamps
+class TimeStamps():
+    def __init__(self, timeStamps):
+        self.data = timeStamps
+        
+        return
     
     

@@ -1,0 +1,107 @@
+/*
+    VIEWS PANEL CSS
+*/
+#visTitle {
+    width: 100%;
+    height: auto;
+
+    padding-bottom: 30px;
+}
+
+.vis-title {
+    color: rgb(157, 157, 157)
+}
+
+#visPanelContainer {
+    display: flex;
+    flex-shrink: 1;
+    flex-direction: row;
+
+    height: 100%;
+}
+
+
+/* AREA TITLE */
+.area-title {
+    width: 100%;
+    height: 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0px 2px;
+    margin-bottom: 10px;
+}
+
+#divider {
+    flex-grow: 1;
+
+    background-color: rgb(157, 157, 157);
+
+    height: 1px;
+    margin: 0px 8px;
+}
+
+#viewSidebar {
+    height: 100%;
+    width: 25%;
+
+}
+
+#viewArea {
+    height: 100%;
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: top;
+
+    padding-left: 40px;
+
+}
+
+#layerControl {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+
+    line-height: 0px;
+}
+
+#layerTab {
+    flex-grow: 1;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+}
+
+.layer-label {
+    overflow: hidden;
+    height: 100%;
+}
+
+.icon {
+    padding: 2px;
+    cursor: pointer;
+    color: #c7c7c7
+}
+
+.settings-icon {
+    margin-left: 5px;
+}
+
+
+
+.visualisation-area {
+    /*Background and Border*/
+    background-color: #fcfcfc;
+    border: solid;
+    border-color: black;
+    border-width: 0.5px;
+}

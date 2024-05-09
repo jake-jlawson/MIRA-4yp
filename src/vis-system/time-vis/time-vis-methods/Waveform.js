@@ -21,7 +21,7 @@ export class Waveform {
             let max = d3.max(this.data, d => Math.abs(d));
             console.log(max);
             let log_max = 10*Math.log10(max + 1);
-            let spacing = 0 //spacing above and below the waveform (as proportional of max)
+            let spacing = 0.7 //spacing above and below the waveform (as proportional of max)
             
             // set y-axis scale
             plt.yScale = d3.scaleLinear()

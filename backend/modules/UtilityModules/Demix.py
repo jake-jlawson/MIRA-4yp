@@ -74,7 +74,7 @@ class Demix(ProcessingModule):
             self.data_out["vocals"] = Audio(song.audioData["vocals"])
             self.data_out["comp"] = Audio(song.audioData["comp"])
             self.data_out["bass"] = Audio(song.audioData["bass"])
-            self.data_out["drums"] = Audio(song.audioData["drums"])
+            self.data_out["drums"] = Audio(song.audioData["drums"], duration=20)
 
         else: # demix if not
             demixed_parts = self.demix(audio_src_path)

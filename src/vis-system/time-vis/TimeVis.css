@@ -7,8 +7,8 @@
 
     /* Sizing - this should be dynamic and responsive */
     height: 200px;
-    width: 90%;
-    padding: 10px;
+    width: 100%;
+    padding: 0px 10px 10px 10px;
 
     /*Flex Settings*/
     display: flex;
@@ -17,9 +17,10 @@
 }
 
 #viewer {
-    padding-left: 30px;
+    padding-left: 20px;
     height: 100%;
 }
+
 
 
 
@@ -52,6 +53,13 @@
 
 #plotArea {
     overflow: visible;
-    border: solid 2px #161616;
+    border: solid 1.5px #161616;
 }
 
+
+
+
+
+.playhead {
+    z-index: 1000;
+}

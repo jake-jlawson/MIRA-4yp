@@ -19,12 +19,16 @@ import { RiPlayFill, RiSkipForwardFill, RiSkipBackFill, RiArrowLeftSLine, RiArro
 // Time-based visualisation imports
 import { Waveform } from './time-vis-methods/Waveform';
 import { Waveform2 } from './time-vis-methods/Waveform2';
+import { Waveform3 } from './time-vis-methods/Waveform3';
+import { BarLines } from './time-vis-methods/BarLines';
+import { TimeSeries } from './time-vis-methods/TimeSeries';
 
 
 /* 
     TIME-BASED VISUALISATION COMPONENT
 */
 export default function TimeVis() {
+    
     return (
         <div id="timeVisContainer">
             <VisControls />
@@ -45,6 +49,7 @@ function ViewingArea() {
     const viewRef = useRef();
     const plotRef = useRef();
     const [rendering, isRendering] = useState(true);
+    const [plt, setPlt] = useState({});
 
     // Handle Visualisation Data
     const [data, setData] = useState([]);
@@ -52,11 +57,13 @@ function ViewingArea() {
     useEffect(() => {
         
         axios.post('http://127.0.0.1:2000/ds/get-data', {
-            song_id: "2ee4f5b3c328cb953f1e87a6910057e1",
-            data: "main",
-            args: {pps: 50, some_other_arg: 200}
+            song_id: "2ee4f5b3c328cb953f1e87a691007a26",
+            data: "drum_track_energy",
+            args: {pps: 5512, some_other_arg: 200}
         })
             .then(function (response) {
+                console.log("data", response.data);
+                
                 setInfo(response.data.info);
                 setData(response.data.data);
             })
@@ -86,23 +93,17 @@ function ViewingArea() {
 
     // RENDER VISUALISATION
     useEffect(() => {
-        let visPlot = d3.select(plotRef.current);
         
-        console.log(info)
+        let visPlot = d3.select(plotRef.current);
 
         
         //---DEFINE SCALING FUNCTIONS
         let xScale = d3.scaleLinear()
-            .domain([0, info["duration"]])
+            .domain([0, 20])
             .range([0, viewBoxDimensions.width]);
         let yScale = d3.scaleLinear()
             .domain([-1, 1])
             .range([viewBoxDimensions.height, 0]);
-
-
-        
-
-        
 
 
         //---DEFINE VIS PARTS
@@ -140,12 +141,15 @@ function ViewingArea() {
 
             visPlot.selectAll('.data')  
                 .attr('transform', `translate(${transform.x}, 0) scale(${transform.k}, 1)`);
+
         }
+
         const zoom = d3.zoom()
             .scaleExtent([1, 100])
             .translateExtent([[0, 0], [viewBoxDimensions.width, 0]])
             .filter(filter)
             .on("zoom", handleZoomAndDrag);
+        
         
         
         //---RENDER PLOT
@@ -165,14 +169,36 @@ function ViewingArea() {
             height: viewBoxDimensions.height,
         }
 
-        // Render waveform data
-        const waveform = new Waveform(data, info);
-        waveform.render(vis_plot, true);
-        
+        setPlt(vis_plot);
+        setPlayheadLoc(43.5);
 
+
+
+
+        // Render Data
+        if (data.length != 0) {
+            console.log("Data has been found!");
+
+            // Render Time Series
+            const timeseries = new TimeSeries(data, info);
+            timeseries.render(vis_plot, true);
+        }
+
+
+        // Render waveform data
+        // const waveform = new Waveform3(data, info);
+        // waveform.render(vis_plot, true);
+        
+        // // Render barlines
+        // const barlines = new BarLines();
+        // barlines.render(vis_plot);
+
+        
         
 
         isRendering(false);
+
+        
 
         // prevent scrolling then apply the default filter
         function filter(event) {
@@ -187,8 +213,31 @@ function ViewingArea() {
 
     }, [data])
 
+
     // HANDLE PLAYHEAD
-    const [playheadLoc, setPlayheadLoc] = useState(0);
+    const [playheadLoc, setPlayheadLoc] = useState([]);
+    useEffect(() => { // render playhead
+
+        console.log(playheadLoc)
+        
+        if (Array.isArray(playheadLoc) && playheadLoc.length === 0) {
+            return;
+        }
+
+        console.log(plt.plot);
+        console.log(plt.xScale(playheadLoc));
+        console.log(plt.height);
+        
+        (plt.plot).append('line')
+            .attr('class', 'data playhead')
+            .attr('x1', plt.xScale(playheadLoc))
+            .attr('y1', 0)
+            .attr('x2', plt.xScale(playheadLoc))
+            .attr('y2', plt.height)
+            .style('stroke', 'black')
+
+
+    }, [playheadLoc, plt])
     
     
     
@@ -211,8 +260,28 @@ function ViewingArea() {
 /* 
     TIME-VIS CONTROLS
 */
-function VisControls() {
+function VisControls(props) {
     const [value, setValue] = React.useState("");
+
+    const [startTime, setStartTime] = useState(props.start_time);
+    
+    // handle play/pause controls
+    const handlePlay = () => {
+
+    }
+
+    const handlePause = () => {
+
+    }
+
+    const handleSkipBack = () => {
+
+    }
+
+    const handleSkipForward = () => {
+
+    }
+    
     
     return (
         <div id="visControls">
@@ -298,7 +367,7 @@ function VisControls() {
                     }
                 ]}
                 value={value}
-                placeholder="Select Song"
+                placeholder="Rihanna - Disturbia"
                 onChange={params => setValue(params.value)}
 
                 overrides={{
@@ -322,9 +391,6 @@ function VisControls() {
 
 
             <RiArrowRightSLine/>
-
-
-        
         </div>
     )
 }
